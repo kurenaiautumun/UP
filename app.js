@@ -12,6 +12,10 @@ app.get('/', (req, res) => {
   res.render("page")
 });
 
+app.get('/code', (req, res) => {
+  res.render("code")
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
