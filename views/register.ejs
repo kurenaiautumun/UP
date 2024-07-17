@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ====== TITLE ====== -->
+    <title>Signup</title>
+
+    <!-- ====== CSS LINKS ===== -->
+    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="css/signup_in.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/header.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <style>
+        .mystyle {
+            width: 100%;
+            color: var(--white);
+            font-size: 25px;
+            box-sizing: border-box;
+            display: block;
+            transition: all 0.5s ease-out;
+            top: 0px;
+            transition: all 0.5s ease-in-out;
+            transform: scale(1);
+            z-index: 3;
+            left: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #ffffff;
+        }
+
+        .close_nav_berger {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            z-index: 10;
+            display: none;
+        }
+
+        .open_nav_burger {
+            display: none;
+        }
+
+        @media (max-width: 920px) {
+
+            .close_nav_berger,
+            .open_nav_burger {
+                display: block;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<%- include('./partials/modal') %>
+<%- include('./partials/header') %>
+
+    <!-- ======= main ===== -->
+    <main>
+        <section class="sign_up_hero_section">
+            <div class="sign_up_hero_container">
+                <div class="sign_up_hero_box r-flex ali-c">
+                    <div class="sign_up_left_box r-flex ali-c jut-c">
+                        <form id="signup-form" class="sing_up_form_box c-flex ali-c jut-c">
+                            <input required="required" type="name" name="username" id="username"
+                                placeholder="Enter Your Name">
+                            <input type="referral" name="referral" id="referral"
+                                placeholder="Referall Code (if any)">
+                            <input required="required" type="email" name="email" id="email"
+                                placeholder="Enter Your E-mail">
+                            <input required="required" type="password" name="password" id="password"
+                                placeholder="Enter Your Password">
+                            <div class="show_passwed_box r-flex ali-c ">
+                                <input type="checkbox" id="showPass" onclick="myFunction()">
+                                <label for="showPass">Show Password</label>
+                            </div>
+                            <button type="submit" class="sing_up_data_submit_btn">Sign Up</button>
+                            <!-- <button type="submit" class="google_sign_up_btn r-flex ali-c jut-c">
+                                <svg width="20" height="20" viewBox="0 0 18 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M16.3541 7.53113H15.75V7.5H9V10.5H13.2386C12.6203 12.2464 10.9586 13.5 9 13.5C6.51488 13.5 4.5 11.4851 4.5 9C4.5 6.51488 6.51488 4.5 9 4.5C10.1471 4.5 11.1908 4.93275 11.9854 5.63962L14.1068 3.51825C12.7673 2.26987 10.9755 1.5 9 1.5C4.85812 1.5 1.5 4.85812 1.5 9C1.5 13.1419 4.85812 16.5 9 16.5C13.1419 16.5 16.5 13.1419 16.5 9C16.5 8.49713 16.4483 8.00625 16.3541 7.53113Z"
+                                        fill="#FFC107" />
+                                    <path
+                                        d="M2.36475 5.50912L4.82887 7.31625C5.49562 5.6655 7.11037 4.5 9 4.5C10.1471 4.5 11.1907 4.93275 11.9854 5.63962L14.1067 3.51825C12.7672 2.26987 10.9755 1.5 9 1.5C6.11925 1.5 3.621 3.12637 2.36475 5.50912Z"
+                                        fill="#FF3D00" />
+                                    <path
+                                        d="M9.00012 16.5C10.9374 16.5 12.6976 15.7586 14.0285 14.553L11.7072 12.5887C10.9289 13.1806 9.97791 13.5008 9.00012 13.5C7.04937 13.5 5.39299 12.2561 4.76899 10.5202L2.32324 12.4046C3.56449 14.8335 6.08524 16.5 9.00012 16.5Z"
+                                        fill="#4CAF50" />
+                                    <path
+                                        d="M16.3541 7.53113H15.75V7.5H9V10.5H13.2386C12.9428 11.3312 12.41 12.0574 11.706 12.5891L11.7071 12.5884L14.0284 14.5526C13.8641 14.7019 16.5 12.75 16.5 9C16.5 8.49713 16.4483 8.00625 16.3541 7.53113Z"
+                                        fill="#1976D2" />
+                                </svg>
+
+                                <span>Sign in with Google</span>
+                            </button> -->
+
+                            <div class="have_ac"><span>Do have an account?</span> <a href="/login" >Sign in</a></div>
+                        </form>
+                    </div>
+                    <div class="sign_up_right_box"></div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+    <!-- ======= main close ====== -->
+    <script src="js/all_funcs.js"></script>
+    <script type="text/javascript" src="js/base_func.js"></script>
+    <script>
+        var form=document.getElementById("signup-form");
+    
+        async function submitForm(event){
+           event.preventDefault();
+           //console.log("form submitted")
+
+           //console.log(event.target)
+
+           const body = {
+            "username": event.target.username.value,
+            "referral": event.target.referral.value,
+            "email": event.target.email.value,
+            "password": event.target.password.value,
+           }
+
+           //console.log(body)
+
+          let data = await fetch(`/signup`, {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(body),
+                })
+            
+          let user = await data
+
+          //console.log(user.json())
+          //console.log(user.status)
+          if (user.status==201){window.location.href = "/login";}
+        else{
+                alert(await user.json())
+            }
+        }
+
+        //Calling a function during form submission.
+        form.addEventListener('submit', submitForm);
+
+        function burgerFuncation() {
+            var element = document.getElementById("myNAV");
+            element.classList.toggle("mystyle");
+            document.body.classList.toggle("noscroll");
+        }
+        function myFunction() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            }
+            else {
+                x.type = "password";
+            }
+        }
+
+    </script>
+
+
+    <script>
+
+        function setProfile(){
+            let doc = document.getElementById("profile_image")
+            if (localStorage.getItem("user")){
+                let elem = `
+                <a class="nav_manu_link" onclick="changeClass()">
+                    <img style="max-height: 30px;" src="user-bg.png">
+                    <br>
+                    <div class="dropdown-content">
+                        <div>
+                        <a class="profile_points" href="/dashboard"><div class="dropdown_a">Dashboard</div></a>
+                        </div>
+                        <a class="profile_points"  ><div class="dropdown_a" onclick="logout()">Signout</div></a>
+                    </div>
+                </a>
+                `
+                doc.innerHTML = elem
+                }
+        }
+
+        //setProfile();
+
+        async function logout(){
+            let data = await fetch("/logout",{
+                "method": "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+            })
+            let res = await data.json();
+
+            //console.log("res = ", res)
+
+            localStorage.removeItem("user")
+            localStorage.removeItem("token")
+            localStorage.removeItem("userId");
+
+            window.location.href = "/login"
+        }
+
+        function getParams() {
+            var idx = document.URL.indexOf('?');
+            var params = {};
+            if (idx != -1) {
+                var pairs = document.URL.substring(idx + 1, document.URL.length).split('&');
+                for (var i = 0; i < pairs.length; i++) {
+                    nameVal = pairs[i].split('=');
+                    params[nameVal[0]] = nameVal[1];
+                }
+            }
+            //console.log(params["ref"])
+            if (params["ref"]!=null){
+                //console.log("not null")
+                document.getElementById("referral").value = params["ref"]
+            }
+            return params["ref"];
+        }
+        getParams()
+    </script>
+</body>
+
+</html>

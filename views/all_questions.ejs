@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Unorthodox Professionals</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="css/modal.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+  <%- include('./partials/modal') %>
+  <%- include('./partials/header') %>
+  <nav class="navbar">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav" style="float:none">
+        <li style="float:right"><a onclick="newQuestion()"><img src="images/add.png" style="height:20px"></a></li>
+      </ul>
+    </div>
+  </nav>
+  <table id="resultsTable" class="table table-responsive">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Statement</th>
+        <th>Marks</th>
+      </tr>
+    </thead>
+    <tbody id="resultsBody"></tbody>
+  </table>
+  <script src="js/all_funcs.js"></script>
+  <script src="js/question.js"></script>
+  <script>
+    async function loadQuestions(){
+      const allQuestions = await getAllQuestions();
+      console.log("all questions = ", allQuestions)
+      console.log("MyQuestions = ", window.location.href.includes("MyQuestions"))
+      if (window.location.href.includes("MyQuestions")){
+        addQuestionRows(await allQuestions, owner=true);
+      }
+      else{
+        addQuestionRows(await allQuestions, owner=false);
+      }
+    }
+    loadQuestions(); // Load all question into the table resultsTable
+  </script>
+</body>
+</html>

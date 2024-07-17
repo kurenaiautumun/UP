@@ -291,3 +291,22 @@ a{
 li{
     list-style: none;
 }
+
+
+.navigate_item:hover{
+    color: #fff;
+    background-color: #000
+}
+
+.resultsTable{
+    padding-right: 10px;
+}
+
+#quesTag{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#tagContent{
+    min-width: 10px;
+}

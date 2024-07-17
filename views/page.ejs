@@ -6,6 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="css/modal.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style>
 body,h1 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
@@ -17,6 +23,8 @@ body, html {height: 100%}
 </style>
 </head>
 <body>
+  <%- include('./partials/modal') %>
+  <%- include('./partials/header') %>
 
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
   
@@ -27,14 +35,17 @@ body, html {height: 100%}
     justify-content: center;
     display: grid;
     text-align: center;">
-    <h1 style="color:black">COMING SOON</h1>
+    <h1 style="color:black">Unorthodox Professionals</h1>
     <hr class="w3-border-grey" style="margin:auto;width: 100%;">
-    <p style="color: black;">Stay Tuned for our Great Games and other Content</p>
+    <p style="color: black;">Using our CodeMark feature, you can create live coding questions and challenge others to attempt them</p>
+    <p style="color: black;">Be it an interview, or a regular class, CodeMark will if be help to you.</p>
+    <p style="color: black;">Custom test cases can be defined for all questions</p>
+    <p style="color: black;">Check out CodeMark by clicking on All Questions Tab above</p>
   </div>
   <div class="w3-display-bottomleft w3-padding-large">
     Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a>
   </div>
 </div>
-
+<script src="js/all_funcs.js"></script>
 </body>
 </html>

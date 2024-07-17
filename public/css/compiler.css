@@ -9,6 +9,14 @@
     width: 100%;
  }
 
+ #questionBox{
+  min-height: 700px;
+  padding: 5px;
+  width: 100%;
+  border: 2px solid black;
+  margin: 2px;
+}
+
  #customInput{
    min-height: 200px;
    background-color: black;
