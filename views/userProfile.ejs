@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Unorthodox Professionals</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="css/modal.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+  .row{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+</style>
+
+</head>
+<body>
+  <%- include('./partials/modal') %>
+  <%- include('./partials/header') %>
+  <div class="container" style="width:100%">
+    <div class="row">
+      <%# comment %>
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <img src="images/up.png" style="min-height: 300px">
+        </div>
+        <div class="col-sm-4"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <label for="name">Welcome: </label><input id="userName" name="name" style="border: none" disabled>
+        </div>
+        <div class="col-sm-4"></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <label for="questionsSolved">Questions Solved:</label>
+            <input id="questionsSolved" name="questionsSolved" style="border: none" disabled>
+          </div>
+        <div class="col-sm-4"></div>
+      </div>
+      <div class="row">
+        <h2>All Solved Questions</h2>
+        <table id="resultsTable" class="table table-responsive">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Statement</th>
+              <th>Marks</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="js/all_funcs.js"></script>
+  <script src="js/user_specific.js"></script>
+  <script>
+    // For loading Table of Questions Solved
+    async function loadQuestions(){
+      let specificQues = {}
+      let savedQues = []
+      let allQuestions = await userProfile();
+      //const allQuestions = await allSolvedQuestions();
+      console.log("all questions = ", allQuestions)
+      for(let ind in allQuestions){
+        let question = allQuestions[ind]
+        console.log("question = ", question, question["questionId"])
+        if (savedQues.includes(question["questionId"])==false){
+          specificQues[question["questionId"]] = question
+          savedQues.push(question["questionId"])
+        }
+        else{
+          if (specificQues[question["questionId"]]["marks"]<question["marks"]){
+            specificQues[question["questionId"]]["marks"] = question["marks"]
+          }
+        }
+      }
+      //console.log("MyQuestions = ", window.location.href.includes("MyQuestions"))
+      quesList = []
+      let count = 0
+      for (ques in specificQues){
+        quesList.push(specificQues[ques])
+        count ++;
+      }
+      document.getElementById("questionsSolved").value = count
+      addQuestionRows(await quesList, owner=false, solve=true)
+    }
+    loadQuestions(); // Load all question into the table resultsTable
+  </script>
+  <script src="js/question.js"></script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- share Metas -->
+    <meta
+      property="og:url"
+      content="https://autumnkurenai.com/"
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Where Great Ideas Come Together" />
+    <meta
+      property="og:description"
+      content="How much does culture influence creative thinking?"
+    />
+    <meta
+      property="og:image"
+      content=""
+    />
+
+    <!-- Site Metas -->
+    <title>Kurenai</title>
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+
+    <!-- css -->
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/blog.css" />
+    <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../style2.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon" />
+
+    <style>
+        /* The Modal (background) */
+        .modal {
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0,0,0); /* Fallback color */
+          background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+  
+        /* Modal Content */
+        .modal-content {
+          background-color: #fefefe;
+          margin: auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 80%;
+        }
+        .hero_image {
+          min-height: 200px;
+          background-color: #888;
+          background-position: center; /* Center the image */
+          background-repeat: no-repeat; /* Do not repeat the image */
+          background-size: cover; /* Resize the background image to cover the entire container */
+        }
+        .title-text{
+          color: white;
+        }
+      </style>
+
+  </head>
+  <body>    
+    <%- include('./partials/header') %>
+    <%- include('./partials/modal') %>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 hero_image title-text" id="banner_image">
+          <div class="col-sm-12" id="StoryTitle">
+            <p><%= tags[0] %></p>
+          </div>
+          <div class="col-sm-12" id="StoryTitle" >
+            <h1><%= title %></h1>
+          </div>
+          <div class="col-sm-12" id="StoryAuthor"><%= author %></div>
+          <div class="col-sm-4">views: <%= Views %> rating: <%= rating %> likes: <%= Likes %></div>
+        </div>
+        <div class="col-sm-12" id="allChapters">
+          <h3>Questions <img src="../images/plus.png" style="height:20px; width: 20px;" onclick="addChapter()"></h3>
+          <div id="allChapters"></div>
+        </div>
+        <div class="col-sm-12"></div>
+        <div class="col-sm-1"></div>
+      </div>
+    </div>
+    <script>
+      async function getStory(){
+        let result = await fetch(window.location.href,{
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+
+        let data = await result.json()
+        console.log("data = ", data)
+        loadStory(data); // Load Story related data upwards
+      }  
+      getStory();
+
+      async function userData(){
+            let token = localStorage.getItem("token")
+            let data = await fetch("/current_user", {
+                method: "POST",
+                headers:{
+                    "Content-type": "application/json",
+                    'Authorization': "Bearer " + token
+                }   
+            })
+            let user = await data.json()
+            console.log("user = ", user)
+            return user._id
+        }
+
+      async function loadStory(data){
+        let image_div = document.getElementById("banner_image")
+        console.log("image_div = ", image_div, data.titleImage, image_div.style)
+        image_div.style.backgroundImage = `url(${data.titleImage})`
+        console.log("image_div.style = ", image_div.style.backgroundImage)
+        let owner = false
+        let userId = await userData();
+
+        console.log(userId)
+        console.log(data.userId, userId==data.userId)
+        if (userId==data.userId){
+          owner = true
+        }
+        
+        loadChapters(data.chapters, owner);
+      }
+
+      async function addQuestion(){
+    const token = localStorage.getItem("token")
+        const ques = {
+                "userId": localStorage.getItem("user"),
+                //"titleImage": "https://kurenai-image-testing.s3.ap-south-1.amazonaws.com/logo-removebg-preview.png",
+                "tag": ["test"],
+                "marks": 100,
+                "testCases": {},
+                "statement": "Please Write Something Here",
+                //"initialCode": data.initialCode,
+                //"initialTest": data.initialTest,
+                //"initialAns": data.initialAns,
+            }
+      let data = await fetch("/addQuestion",{
+          method: "POST",
+          headers: {
+              "content-type": "application/json",
+              Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify(ques)
+      })
+
+      let status = await data.status
+      console.log("status = ", status)  
+      let quess = await data.json()
+      console.log("data = ", await quess)
+      if (status==201){
+          window.location.href = `/write?quesId=${quess.data._id}`
+      }
+      else if (status==404){
+          console.log(quess)
+          showModal(quess["msg"], status) // Show Modal will be imported from a separate file
+          setTimeout(closeModal, 4000);
+      }
+
+      console.log("data = ", quess)
+  }
+
+  async function partialQuestion(){
+    const token = localStorage.getItem("token")
+        const ques = {
+                "userId": localStorage.getItem("user"),
+                //"titleImage": "https://kurenai-image-testing.s3.ap-south-1.amazonaws.com/logo-removebg-preview.png",
+                "tag": ["test"],
+                "marks": 100,
+                "testCases": {},
+                "statement": "Please Write Something Here",
+                //"initialCode": data.initialCode,
+                //"initialTest": data.initialTest,
+                //"initialAns": data.initialAns,
+            }
+      let data = await fetch("/addQuestion",{
+          method: "POST",
+          headers: {
+              "content-type": "application/json",
+              Authorization: "Bearer " + token,
+          },
+          body: JSON.stringify({"data": ques})
+      })
+
+      let quess = await data.json()
+      console.log("quess = ", quess)
+      return quess.data._id
+  }
+
+  let owner = false; // This should be updated by the fact whether the owner is opening the page or someone else
+
+      async function addChapter(){
+        // Add a new chapter to an exisiting story
+        const token = localStorage.getItem("token")
+        console.log(window.location.href)
+        let split = window.location.href.split("/")
+        console.log(split, split.length)
+        console.log(split)
+        const testName = split[split.length-1].replace(/%20/g, " ")
+        console.log('testName = ', testName)
+        let quesId = await partialQuestion();
+        console.log("quesId = ", quesId)
+        const ques = {
+            ques: await quesId,
+            testName: testName
+        }
+        let result = await fetch("/addChapter",{
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify(ques)
+        })
+        let data = await result.json()
+        console.log('data = ', data.data)
+        addChapterBlock(data.data, true); // Add block to chapter section
+      }
+
+      async function loadChapters(chapters, owner){
+        // Get the div for all chapters
+        for(let key in chapters){ // loop over all chapters and add them to tabs
+          if (owner==false){
+            console.log("status = ", chapters[key]["ques"]["status"], chapters[key]["ques"]["status"]!="published")
+            //if (chapters[key]["ques"]["status"]!="published"){
+            //  continue
+            //}
+          }
+          addChapterBlock(chapters[key], owner);
+        }
+      }
+
+    async function addChapterBlock(chapter, owner){
+      //console.log("status = ", chapter["ques"]["status"], chapter["ques"]["status"]!="published")
+      //if (owner==true){
+      //  if (chapter["ques"]["status"]!="published"){
+      //    return null
+      //  }
+      //}
+      console.log("chapter = ", chapter)
+      let allChapters = document.getElementById("allChapters");
+      let div = document.createElement("div")
+      div.setAttribute("class", "row");
+      div.style.backgroundColor = "#fbfbfb";
+      div.style.margin = "5px";
+
+      let imageSrc = chapter["ques"]["titleImage"]
+
+      // Getting and limiting the lenght of question statement
+      let statement = chapter["ques"]['statement']
+      if (statement.length>30){
+        statement = statement.slice(0,30)
+      }
+
+      if (imageSrc==null){
+        imageSrc = "https://kurenai-image-testing.s3.ap-south-1.amazonaws.com/logo-removebg-preview.png"
+      }
+      let quesId = chapter["ques"]["_id"]
+      let chapterTab = `
+        <div class="col-xs-4">
+          <img style=" max-height: 200px;" src="${imageSrc}">
+        </div>
+        <div class="col-xs-6">
+          <a href="/ViewQuestion?question=${quesId}"><h4>${statement}</h4></a>
+        </div>
+        <div class="col-xs-1">
+          `
+      console.log("owner = ", owner)
+      if (owner==true){
+        chapterTab += `<div class="row">
+            <a href="/addQuestion?question=${quesId}&test=${true}">
+              <img style="height: 20px" src="../images/edit.png">
+            </a>
+          </div>
+          <div class="row">
+            <h5>${chapter["ques"]["status"]}</h5>
+          </div>`
+      }
+
+      chapterTab += `<div class="row">
+            # ${chapter['number']}
+          </div>
+        </div>
+      `
+      div.innerHTML = chapterTab
+      allChapters.append(div);
+    }
+    </script>
+    <%- include('./partials/footer') %>
+  </body>
+</html>

@@ -60,25 +60,15 @@
       </select>
       <button onclick="compilation()" class="btn btn-primary" style="float: right; padding-bottom: 0px;">Run</button>
       <button onclick="submitCode()" class="btn btn-primary" style="float: right; padding-bottom: 0px;">Submit</button>
+      <button onclick="editQuestion()" class="btn btn-primary" style="float: right; padding-bottom: 0px;">Save Question</button>
     </div>
     <div class="row" style="height: 100%;">
       <div class="col-sm-6" style="max-height: 650px; overflow:auto;">
         <h2 style="justify-content: center; display: grid;">
               Code Statement: 
         </h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu sodales purus. Maecenas porttitor lacus et elit mollis, id suscipit tortor tempus. Integer accumsan viverra odio, at dapibus quam dapibus congue. Suspendisse dolor metus, tristique quis turpis at, congue malesuada magna. Cras nec orci nunc. Nulla non congue arcu. In vel justo metus. Ut facilisis erat in pretium iaculis. Sed nec posuere ligula, vel ullamcorper mauris. Sed sed egestas tellus. Morbi sed justo dapibus, tempus neque id, cursus lacus. Duis ac elit et nisl consequat molestie. Curabitur vulputate interdum mauris.
-
-Maecenas at consectetur ex. Phasellus nec erat eu magna dapibus sollicitudin. Vestibulum porta leo nibh, porta placerat diam bibendum nec. Aliquam vitae leo sit amet risus posuere molestie. Vivamus quis elementum urna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum luctus dolor ut elit tempus dignissim. Quisque non molestie lorem, a fermentum mi. Nunc vel varius ex, non congue arcu. In non dignissim velit, non venenatis nulla. Morbi et sem et leo vehicula sagittis. Morbi ornare ligula eros, id imperdiet mi imperdiet sit amet. Aliquam mauris odio, congue ut faucibus euismod, dictum quis nibh.
-
-Aliquam ultrices est in vehicula luctus. Donec suscipit, justo ut luctus luctus, libero risus interdum metus, vitae iaculis velit nunc at turpis. Fusce rhoncus orci metus, eu pharetra magna vulputate sagittis. Maecenas velit ligula, vestibulum non diam ut, rhoncus pharetra magna. Aenean tellus quam, lacinia sed orci in, molestie finibus quam. Vestibulum ut odio magna. In turpis arcu, fringilla molestie sodales ultrices, tempus non sem. Duis ornare ipsum vitae lorem congue vestibulum. Quisque lacinia accumsan imperdiet. Praesent eu justo eu felis tincidunt hendrerit ut nec nulla. Vestibulum eget felis faucibus, dictum odio nec, vulputate enim. Morbi vel elit et augue malesuada feugiat ac sollicitudin leo. Pellentesque sagittis arcu quis quam auctor, at placerat quam feugiat.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu sodales purus. Maecenas porttitor lacus et elit mollis, id suscipit tortor tempus. Integer accumsan viverra odio, at dapibus quam dapibus congue. Suspendisse dolor metus, tristique quis turpis at, congue malesuada magna. Cras nec orci nunc. Nulla non congue arcu. In vel justo metus. Ut facilisis erat in pretium iaculis. Sed nec posuere ligula, vel ullamcorper mauris. Sed sed egestas tellus. Morbi sed justo dapibus, tempus neque id, cursus lacus. Duis ac elit et nisl consequat molestie. Curabitur vulputate interdum mauris.
-
-Maecenas at consectetur ex. Phasellus nec erat eu magna dapibus sollicitudin. Vestibulum porta leo nibh, porta placerat diam bibendum nec. Aliquam vitae leo sit amet risus posuere molestie. Vivamus quis elementum urna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum luctus dolor ut elit tempus dignissim. Quisque non molestie lorem, a fermentum mi. Nunc vel varius ex, non congue arcu. In non dignissim velit, non venenatis nulla. Morbi et sem et leo vehicula sagittis. Morbi ornare ligula eros, id imperdiet mi imperdiet sit amet. Aliquam mauris odio, congue ut faucibus euismod, dictum quis nibh.
-
-Aliquam ultrices est in vehicula luctus. Donec suscipit, justo ut luctus luctus, libero risus interdum metus, vitae iaculis velit nunc at turpis. Fusce rhoncus orci metus, eu pharetra magna vulputate sagittis. Maecenas velit ligula, vestibulum non diam ut, rhoncus pharetra magna. Aenean tellus quam, lacinia sed orci in, molestie finibus quam. Vestibulum ut odio magna. In turpis arcu, fringilla molestie sodales ultrices, tempus non sem. Duis ornare ipsum vitae lorem congue vestibulum. Quisque lacinia accumsan imperdiet. Praesent eu justo eu felis tincidunt hendrerit ut nec nulla. Vestibulum eget felis faucibus, dictum odio nec, vulputate enim. Morbi vel elit et augue malesuada feugiat ac sollicitudin leo. Pellentesque sagittis arcu quis quam auctor, at placerat quam feugiat.
-
-        </p>
+        <textarea id="questionBox">Question:
+        </textarea>
         
       </div>
       <div class="col-sm-6" style="max-height: 650px; overflow:initial;">
@@ -89,7 +79,9 @@ Aliquam ultrices est in vehicula luctus. Donec suscipit, justo ut luctus luctus,
         <div class="row">
           <div class="col-sm-6" style="padding-bottom: 10px; padding-left: 0px;">
             <p>Add Custom Input: </p>
-            <textarea id="customInput"></textarea>
+            <textarea id="customInput">2
+1 2
+1 3</textarea>
           </div>
           <div class="col-sm-6" style="padding-bottom: 10px; padding-left: 0px;">
             <p>Result: </p>
@@ -97,31 +89,17 @@ Aliquam ultrices est in vehicula luctus. Donec suscipit, justo ut luctus luctus,
           </div>
         </div>
           <div id="tableHolder" class="col-sm-12" style="padding-bottom: 10px">
-            <h2 style="justify-content: center; display: grid;;">Test Cases</h2>
             <table id="resultsTable" class="table table-responsive">
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Status</th>
+                  <th>Input</th>
+                  <th>Output</th>
                   <th>Time(ms)</th>
+                  <th></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td># Test Case-1</td>
-                  <td>Fail</td>
-                  <td>0.00</td>
-                </tr>
-                <tr>
-                  <td># Test Case-2</td>
-                  <td>Fail</td>
-                  <td>0.00</td>
-                </tr>
-                <tr>
-                  <td># Test Case-3</td>
-                  <td>Fail</td>
-                  <td>0.00</td>
-                </tr>
+              <tbody id="resultsBody">
               </tbody>
             </table>
           </div>
@@ -150,12 +128,17 @@ Aliquam ultrices est in vehicula luctus. Donec suscipit, justo ut luctus luctus,
             require(["vs/editor/editor.main"], function () {
             	window.editor = monaco.editor.create(document.getElementById('editorBlock'), {
             		value: [
-                  '# Test Cases will be administered by taking input using stdin function',
-                  '# Please Write Your Code Here',
-            			'def test():',
-                  '\tinp = input()',
-            			'\tprint("Hello world!", inp);\n',
-                  'test()'
+                  '# Test Cases will be administered by using the inputs string',
+                  '# Please Write Your Code Here and Do Not Remove the main() function',
+            			'def main():',
+	                //'\tsplited = inputs.split(",")',
+	                //'\ttest_cases = splited[0]',
+	                //'\tinputs = splited[1:]',
+	                //'\tfor i in range(0, int(test_cases)):',
+	                //'\t\t	print(f"{i}th case = ",  inputs[i])',
+	                '\tprint("Hello world!")',
+                  '\t',
+                  'main()',
             		].join('\n'),
             		language: 'python',
             		theme: 'vs-dark'
@@ -168,315 +151,14 @@ Aliquam ultrices est in vehicula luctus. Donec suscipit, justo ut luctus luctus,
             }
 </script>
 <script>
-
-  let selectedLanguage = "python";
-  let languageCode = 71
-  let languageDict = {}
-
-  const removeElement = el => el.parentNode.removeChild(el);
-
-  async function compilation(){
-    const url = "https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&fields=*";
-    //console.log(window.editor.getValue())
-
-    let encodedString = btoa(unescape(encodeURIComponent(window.editor.getValue())));//Base64.encode(editor.innerText);
-    let text = document.getElementById("customInput").value
-    console.log("text = ", text)
-    console.log("language code = ", languageCode)
-      let encodedStdin = btoa(unescape(encodeURIComponent(text)));//Base64.encode(editor.innerText);
-      const body = JSON.stringify({
-        language_id: languageCode,
-        source_code: encodedString,
-        stdin: encodedStdin
-      })
-
-    console.log("body = ", body)
-
-    const options = {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "Content-Type": "application/json",
-        "X-RapidAPI-Key": "64aa6b24d2msh22d5a0cb438b9b2p1e6dc0jsn11c105dc81d4",
-        "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com"
-      },
-      body: body
-
-    };
-    //console.log("encoded = ", encodedString);
-//
-    try {
-    	const response = await fetch(url, options);
-    	const result = await response.json();
-    	console.log(result);
-
-      if (await result["token"]!=null){
-        getAnswer(result["token"]);
-      }
-    } catch (error) {
-    	console.error(error);
-    }
-  }
-
-  async function getAnswer(token){
-    let url = `https://judge0-ce.p.rapidapi.com/submissions/${token}?base64_encoded=false&fields=token,stdout,stderr,status_id,language_id,time`
-    const options = {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "Content-Type": "application/json",
-        "X-RapidAPI-Key": "64aa6b24d2msh22d5a0cb438b9b2p1e6dc0jsn11c105dc81d4",
-        "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com"
-      },
-    };
-    try {
-    	const response = await fetch(url, options);
-    	const result = await response.json();
-    	console.log(result);
-      let customOut = document.getElementById("customOutput");
-      customOut.value = result["stdout"]
-    } catch (error) {
-    	console.error(error);
-    }
-  }
-
-  function generatingTable(answers){ // For creating the table to show test case results
-    removeElement(document.getElementById("resultsTable"));
-    let table = document.createElement("table")
-    table.setAttribute("id", "resultsTable")
-    table.setAttribute("class", "table table-responsive")
-
-    let thead = document.createElement("thead")
-    thead.innerHTML = `
-      <th>Name</th>
-      <th>Status</th>
-      <th>Time(ms)</th>
-    `
-    table.append(thead)
-    let tbody = document.createElement("tbody")
-    let count = 1
-    for (let ans in answers){
-      console.log(answers[ans], allCases[ans], answers[ans]==allCases[ans])
-      let tr = document.createElement("tr")
-      if (answers[ans]==allCases[ans]){
-        status = "Pass"
-        tr.innerHTML = `
-          <td># Test Case-${count}</td>
-          <td style="color:green">${status}</td>
-          <td>0.00</td>
-        `
-      }
-      else{
-        status = "Fail"
-        tr.innerHTML = `
-          <td># Test Case-${count}</td>
-          <td style="color:red">${status}</td>
-          <td>0.00</td>
-        `
-      }
-      count += 1
-      tbody.append(tr)
-    }
-    table.append(tbody)
-    
-    let holder = document.getElementById("tableHolder");
-    holder.append(table);
-  }
-  
-  async function getAnswers(tokens){
-    let url = `https://ce.judge0.com/submissions/batch?tokens=${tokens}&base64_encoded=false&fields=token,stdout,stderr,status_id,language_id,time`
-    const options = {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "Content-Type": "application/json",
-        "X-RapidAPI-Key": "64aa6b24d2msh22d5a0cb438b9b2p1e6dc0jsn11c105dc81d4",
-        "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com"
-      },
-    };
-    try {
-    	const response = await fetch(url, options);
-    	const result = await response.json();
-    	console.log(await result);
-      let answers = {}
-      count = 0
-      subs = await result["submissions"]
-      for (let ans in allCases){
-        answers[ans] = await subs[count]["stdout"]
-        count += 1
-      }
-      console.log("answers = ", answers)
-      generatingTable(answers)
-    } catch (error) {
-    	console.error(error);
-    }
-  }
-
-  let allCases = {}
-
-  async function testCases(){
-    // Get all the Test cases and use them in submit code
-    allCases = {
-      "1 2 3": "Hello world! 1 2 3\n",
-      "2 3 4": "Hello world! 2 3 4\n",
-      "3 4 5": "Hello world! 3 4 5\n"
-    }
-    return allCases
-  }
-
-  async function submitCode(){
-    const url = "https://judge0-ce.p.rapidapi.com/submissions/batch?base64_encoded=true&fields=*";
-    //console.log(window.editor.getValue())
-
-    let encodedString = btoa(unescape(encodeURIComponent(window.editor.getValue())));//Base64.encode(editor.innerText);
-
-    let batchBody = {
-      "submissions": []
-    }
-
-    allCases = await testCases();
-    console.log("allCases = ", await allCases)
-    for (cases in await allCases){
-      let encodedStdin = btoa(unescape(encodeURIComponent(cases)));//Base64.encode(editor.innerText);
-      batchBody["submissions"].push({
-        language_id: languageCode,
-        source_code: encodedString,
-        stdin: encodedStdin
-      })
-    }
-
-    const body = JSON.stringify(
-      batchBody
-    )
-
-    console.log("body = ", body)
-
-    const options = {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "Content-Type": "application/json",
-        "X-RapidAPI-Key": "64aa6b24d2msh22d5a0cb438b9b2p1e6dc0jsn11c105dc81d4",
-        "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com"
-      },
-      body: body
-
-    };
-    //console.log("encoded = ", encodedString);
-//
-    try {
-    	const response = await fetch(url, options);
-    	const result = await response.json();
-    	console.log(result);
-      let tokens = ""
-      for (let token in result){
-        console.log("token, result = ", token, result[token])
-        tokens += result[token].token + ","
-      }
-      tokens = tokens.slice(0, -1); 
-      console.log("tokens = ", tokens)
-      if (await result!=null){
-        getAnswers(tokens);
-      }
-    } catch (error) {
-    	console.error(error);
-    }
-  }
-
-
-  function changeLanguage(){
-    // For changing the language after one time
-    console.log("changing language")
-    let language = document.getElementById("languageSelector").value
-    console.log("selected language = ", language)
-
-    languageCode = languageDict[language]
-    console.log("selected language ID = ", languageCode)
-
-    let lowerLanguage = language.toLowerCase();
-    console.log("lower language = ", lowerLanguage)
-
-    let editor = document.getElementById("monacoEditor")
-
-    allowed = ["python", "java", "javascript", "c++"]
-
-    selection = ""
-
-    for (name in allowed){
-      if (lowerLanguage.includes(allowed[name])){
-        console.log("editor = ", editor)
-        selection = allowed[name]
-        // editor.setAttribute("language", allowed[name])
-        //let elem = document.getElementById("editorHolder")
-        //elem.innerHTML = `<wc-monaco-editor id="monacoEditor" style="min-height: 400px;" language="${allowed[name]}" fontSize="16"></wc-monaco-editor>`
-      }
-    }
-    if (selection!=""){
-      selectedLanguage = selection
-    }
-    showModal();
-  }
-
-  function showModal(){
-    var modal = document.getElementById("myModal_new");
-    modal.style.display = "grid";
-}
-
-function closeModal(){
-    var modal = document.getElementById("myModal_new");
-    modal.style.display = "None";
-}
-
-  function changeCode(option){
-    console.log("selection = ", selection, editor_uri)
-    if (option==true){
-        let model = window.editor.getModel(window.editor.uri)
-        console.log("model = ", model)
-        monaco.editor.setModelLanguage(model, selection);
-        //window.editor.updateOptions({
-        //  language: selection  // or whatever language you need here, javascript, or go or whatever
-        //});
-        // console.log(`model language was changed to ${model.getLanguageIdentifier().language}`);
-    }
-    console.log(window.editor._configuration._rawOptions.language)
-    closeModal();
-  }
-
-  async function setAllLanguages(languages){
-    let llist = document.getElementById("languageSelector")
-    for (language in languages){
-      //console.log("language = ", language, languages[language])
-      let options = document.createElement("option")
-      options.innerHTML = languages[language]["name"]
-      languageDict[languages[language]["name"]] = languages[language]["id"]
-      llist.append(options)
-    }
-  }
-
-  // Get all Languages available for compilation
-  async function getAllLanguages(){
-      const url = "https://ce.judge0.com/languages/all"
-      const options = {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          "Content-Type": "application/json",
-          //"X-RapidAPI-Key": "64aa6b24d2msh22d5a0cb438b9b2p1e6dc0jsn11c105dc81d4",
-          //"X-RapidAPI-Host": "judge0-ce.p.rapidapi.com"
-        },
-      }
-      try {
-      	const response = await fetch(url, options);
-      	const result = await response.json();
-      	//console.log("all languages = ", result);
-        setAllLanguages(result);
-      } catch (error) {
-      	console.error("all languages =", error);
-      }
-    }
-  getAllLanguages();
+  let testCount = 1 // Knowing the count of test cases for adding more
 </script>
-
+<script src="js/all_funcs.js"></script>
+<script src="js/code.js"></script>
+<script src="js/question.js"></script>
+<script>
+  loadQuestion();
+</script>
 
 </body>
 
