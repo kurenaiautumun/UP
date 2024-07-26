@@ -53,6 +53,6 @@ app.listen(port, () => {
 });
 
 
-//process.on('uncaughtException', err => {
-//  console.log(`Uncaught Exception - : ${err.message}`)
-//})
+process.on('uncaughtException', err => {
+  console.log(`Uncaught Exception - : ${err.message}`)
+})
