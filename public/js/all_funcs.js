@@ -32,7 +32,7 @@ async function current_user(){
         let li = document.createElement("li")
         li.setAttribute("class", "navigate_item")
         li.style.float = "right"
-        li.innerHTML  = `<a href="/userProfile?userId=${result._id}"><img src="profileImage"></a>`
+        li.innerHTML  = `<a href="/userProfile?userId=${result._id}" id="aProfileSmall"><img src="images/profile.png" id="profileSmall"></a>`
         navbar.append(li)
       }
 }

@@ -310,3 +310,19 @@ li{
 #tagContent{
     min-width: 10px;
 }
+
+#indexLogo{
+    padding-left: 250px;
+    opacity: 0.3;
+    padding-top: 20px;
+}
+
+#profileSmall{
+    padding: 0px;
+    height: 40px;
+}
+
+#aProfileSmall{
+    height: 100%;
+    padding: 0px;
+}
