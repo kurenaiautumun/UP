@@ -39,3 +39,33 @@
   padding-top: 12px;
 }
 
+#profileSmall{
+  padding: 0px;
+  height: 40px;
+}
+
+#aProfileSmall{
+  height: 100%;
+  padding: 0px;
+}
+
+#userName{
+  border: none;
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+  font-size: 50px;
+  padding-top: 5px;
+}
+
+#questionsSolved{
+  border: none;
+  justify-items: center;
+  align-items: center;
+  background-color: white;
+  font-size: 50px;
+}
+
+#profileImage{
+  max-height: 200px;
+}
